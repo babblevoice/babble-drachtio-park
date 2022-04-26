@@ -63,6 +63,18 @@ class park {
   }
 
   /**
+   * 
+   * @param { string } lot 
+   * @param { object } search - lot.find
+   * @returns { call }
+   */
+  find( lot, search ) {
+    if( this._lots.has( lot ) ) {
+      return this._lots.get( lot ).find( search )
+    }
+  }
+
+  /**
    * Wrapper for our event emitter
    * @param { object } ev 
    * @param { function } cb 
