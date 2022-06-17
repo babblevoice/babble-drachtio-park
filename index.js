@@ -28,6 +28,11 @@ class park {
     @private
     */
     this._lots = new Map()
+
+    /**
+     * Add the ability to park a call via an event.
+     */
+    this._options.em.on( "park.call", this._park.bind( this ) )
   }
 
   /**
@@ -35,6 +40,15 @@ class park {
    */
   static create( options ) {
     return new park( options )
+  }
+
+  /**
+   * @param { object } obj
+   * @param { string } obj.lot - the lot to park the call in
+   * @param { object } obj.call - the call object
+   */
+  _park( obj ) {
+    this.park( obj.call, obj.lot )
   }
 
   /**
