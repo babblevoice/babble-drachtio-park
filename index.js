@@ -53,14 +53,16 @@ class park {
 
   /**
    * Park a call in a lot
-   * @returns { string } the parking number ( i.e. "01" )
+   * @param { object } call
+   * @param { string } lot
+   * @returns { object } the parked leg with the vars.parking object set
    */
   park( call, lot ) {
     if( this._lots.has( lot ) ) {
       return this._lots.get( lot ).park( call )
     }
 
-    let ourlot = parkinglot.create( this._options )
+    const ourlot = parkinglot.create( this._options )
     this._lots.set( lot, ourlot )
     return ourlot.park( call )
   }
@@ -68,7 +70,7 @@ class park {
   /**
    * Pop a call from a parking lot
    * @param { string } id - the id or undefined (undefined = the longest waiting)
-   * @returns { call } the call object
+   * @returns { object } the call object
    */
   unpark( lot, id ) {
     if( this._lots.has( lot ) ) {
@@ -80,7 +82,7 @@ class park {
    * 
    * @param { string } lot 
    * @param { object } search - lot.find
-   * @returns { call }
+   * @returns { object } (call)
    */
   find( lot, search ) {
     if( this._lots.has( lot ) ) {
