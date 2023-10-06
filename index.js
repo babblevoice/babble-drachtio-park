@@ -99,6 +99,7 @@ class park {
     if( this._lots.has( lot ) ) {
       return this._lots.get( lot ).get()
     }
+    return []
   }
 
   /**
