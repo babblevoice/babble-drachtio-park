@@ -6,18 +6,19 @@ const park = require( "../../index.js" )
 
 
 describe( "interface index.js", function() {
-  it( `park emit`, async function() {
-    let call = {
+  it( "park emit", async function() {
+    const call = {
       "vars": {},
       "channels": { "audio": false },
       "detach": () => {},
       "on": () => {},
-      "off": () => {}
+      "off": () => {},
+      "remote": { "user": "", "name": ""}
     }
 
-    let parklot = park.create()
+    const parklot = park.create()
     let parkcount = 0
-    parklot.on( "call.park", ( c ) => {
+    parklot.on( "call.park", (  ) => {
       parkcount++
     } )
 
@@ -27,26 +28,28 @@ describe( "interface index.js", function() {
 
   } )
 
-  it( `park multiple emit`, async function() {
-    let call = {
+  it( "park multiple emit", async function() {
+    const call = {
       "vars": {},
       "channels": { "audio": false },
       "detach": () => {},
       "on": () => {},
-      "off": () => {}
+      "off": () => {},
+      "remote": { "user": "", "name": ""}
     }
 
-    let othercall = {
+    const othercall = {
       "vars": {},
       "channels": { "audio": false },
       "detach": () => {},
       "on": () => {},
-      "off": () => {}
+      "off": () => {},
+      "remote": { "user": "", "name": ""}
     }
 
-    let parklot = park.create()
+    const parklot = park.create()
     let parkcount = 0
-    parklot.on( "call.park", ( c ) => {
+    parklot.on( "call.park", (  ) => {
       parkcount++
     } )
 
@@ -60,30 +63,32 @@ describe( "interface index.js", function() {
 
   } )
 
-  it( `park multiple and unpark`, async function() {
-    let call = {
+  it( "park multiple and unpark", async function() {
+    const call = {
       "vars": {},
       "channels": { "audio": false },
       "detach": () => {},
       "on": () => {},
-      "off": () => {}
+      "off": () => {},
+      "remote": { "user": "", "name": ""}
     }
 
-    let othercall = {
+    const othercall = {
       "vars": {},
       "channels": { "audio": false },
       "detach": () => {},
       "on": () => {},
-      "off": () => {}
+      "off": () => {},
+      "remote": { "user": "", "name": ""}
     }
 
-    let parklot = park.create()
+    const parklot = park.create()
     let parkcount = 0
-    parklot.on( "call.park", ( c ) => {
+    parklot.on( "call.park", (  ) => {
       parkcount++
     } )
 
-    parklot.on( "call.unpark", ( c ) => {
+    parklot.on( "call.unpark", (  ) => {
       parkcount--
     } )
 
@@ -107,24 +112,26 @@ describe( "interface index.js", function() {
 
   } )
 
-  it( `park multiple lots`, async function() {
-    let call = {
+  it( "park multiple lots", async function() {
+    const call = {
       "vars": {},
       "channels": { "audio": false },
       "detach": () => {},
       "on": () => {},
-      "off": () => {}
+      "off": () => {},
+      "remote": { "user": "", "name": ""}
     }
 
-    let othercall = {
+    const othercall = {
       "vars": {},
       "channels": { "audio": false },
       "detach": () => {},
       "on": () => {},
-      "off": () => {}
+      "off": () => {},
+      "remote": { "user": "", "name": ""}
     }
 
-    let parklot = park.create()
+    const parklot = park.create()
 
     expect( parklot.park( call, "domainone.com" ).vars.parking.slot ).to.equal( "01" )
     expect( call.vars.parking.slot ).to.equal( "01" )
@@ -133,26 +140,27 @@ describe( "interface index.js", function() {
     expect( othercall.vars.parking.slot ).to.equal( "01" )
   } )
 
-  it( `park call but it hangs up`, async function() {
+  it( "park call but it hangs up", async function() {
 
-    let em = new events.EventEmitter()
+    const em = new events.EventEmitter()
 
-    let call = {
+    const call = {
       "vars": {},
       "channels": { "audio": false },
       "detach": () => {},
       "on": ( ev, cb ) => { em.on( ev, cb ) },
-      "off": () => {}
+      "off": () => {},
+      "remote": { "user": "", "name": ""}
     }
 
-    let parklot = park.create()
+    const parklot = park.create()
 
     let parkcount = 0
-    parklot.on( "call.park", ( c ) => {
+    parklot.on( "call.park", (  ) => {
       parkcount++
     } )
 
-    parklot.on( "call.unpark", ( c ) => {
+    parklot.on( "call.unpark", (  ) => {
       parkcount--
     } )
 
@@ -167,26 +175,26 @@ describe( "interface index.js", function() {
 
   } )
 
-  it( `park call then search by parker`, async function() {
-    let call = {
+  it( "park call then search by parker", async function() {
+    const call = {
       "vars": {},
       "channels": { "audio": false },
       "detach": () => {},
-      "on": ( ev, cb ) => {},
+      "on": ( /*ev, cb*/ ) => {},
       "off": () => {},
-      "remote": { "user": "1000" }
+      "remote": { "user": "1000", "name": ""}
     }
 
-    let anothercall = {
+    const anothercall = {
       "vars": {},
       "channels": { "audio": false },
       "detach": () => {},
-      "on": ( ev, cb ) => {},
+      "on": ( /*ev, cb*/ ) => {},
       "off": () => {},
-      "remote": { "user": "1001" }
+      "remote": { "user": "1001", "name": ""}
     }
 
-    let parklot = park.create()
+    const parklot = park.create()
     expect( parklot.park( anothercall, "domainone.com" ).vars.parking.slot ).to.equal( "01" )
     expect( parklot.park( call, "domainone.com" ).vars.parking.slot ).to.equal( "02" )
 
