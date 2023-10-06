@@ -91,6 +91,17 @@ class park {
   }
 
   /**
+   * 
+   * @param { string } lot 
+   * @returns { Array< object > } an array of parked calls
+   */
+  get( lot ) {
+    if( this._lots.has( lot ) ) {
+      return this._lots.get( lot ).get()
+    }
+  }
+
+  /**
    * Wrapper for our event emitter
    * @param { object } ev 
    * @param { function } cb 
